@@ -20,7 +20,7 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
         git config user.email "$COMMIT_AUTHOR_EMAIL";
     else
         # For local run of script:
-        ZENODO_ACCESS_TOKEN=`cat zenodo-access`;
+        ZENODO_ACCESS_TOKEN=`cat backend/zenodo-access`;
         ZENODO_ACCESS=https://sandbox.zenodo.org/api/deposit/depositions;
     fi;
 fi;
