@@ -21,7 +21,6 @@ do
     then
         # install requirements
         $( bash backend/$backend/$install_requirements $folder $reqs );
-        source activate $folder
         #printf "\n";
         echo Running notebook $notebook ...;
         $( bash backend/$backend/$execute_note $notebook $folder/$executed_file );
