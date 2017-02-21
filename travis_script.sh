@@ -3,27 +3,29 @@
 for folder in $( ls -d */ )
 do
     printf "+++++++++++++++++++++++++++++++ \n";
-	notebook="$folder/$( ls $folder | grep -v '$(executed_file)$' | grep '$(note_file_ext)$' )"
+	notebook="$folder$( ls $folder | grep -v $executed_file$ | grep $note_file_ext$ )"
 
     printf "Processing $folder...\n";
     check_files;
     file_check=$?
     if [ $file_check == 0 ];
     then
-    	continue; # not running in docs or backend
+        printf "+++++++++++++++++++++++++++++++ \n\n";
+        continue; # not running in docs or backend
     fi;
     if [ $file_check == 2 ];
-	then
-    	continue; # files are missing, we keep running for other folders (can be fixed by seperate branches later)
+    then
+        printf "+++++++++++++++++++++++++++++++ \n\n";
+        continue; # files are missing, we keep running for other folders (can be fixed by seperate branches later)
     fi;
     
     if [ ! -f $folder/$executed_file ]; # || [ ! -f $folder/executed_notebook.md ]; # Only run if not already:
     then
         # install requirements
-        $( source backend/$backend/$install_requirements $folder $folder$reqs );
+        source backend/$backend/$install_requirements $folder $folder$reqs;
         #printf "\n";
         echo Running notebook $notebook ...;
-        $( source backend/$backend/$execute_note $notebook $folder$executed_file );
+        source backend/$backend/$execute_note $notebook $folder$executed_file;
         if [ "$TRAVIS_PULL_REQUEST" == "false" ]; 
         then
             echo "Adding executed notebook to github ...";

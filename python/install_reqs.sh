@@ -2,4 +2,4 @@
 env_name=${1%/}
 conda create --name $env_name --clone base;
 source activate $env_name
-pip install $2;
+pip install -r $2;
