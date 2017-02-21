@@ -12,7 +12,7 @@ def create_meta_header(folder):
             meta_key = meta_key or key
             meta_value = meta[key]
             if type(meta_value) is list:
-                meta_value = str(map(lambda x: '{}'.format(x), map(str, meta_value)))
+                meta_value = str([str(x) for x in meta_value])
             else:
                 meta_value = '\"{}\"'.format(meta_value)
             meta_objects.append('{}: {}'.format(meta_key, meta_value))
@@ -76,5 +76,5 @@ if __name__ == "__main__":
         f.write(header)
         f.write('\n')
 
-    subprocess.call(["git", "add", outpath])
+    #subprocess.call(["git", "add", outpath])
     
