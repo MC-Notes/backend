@@ -20,11 +20,11 @@ do
     if [ ! -f $folder/$executed_file ]; # || [ ! -f $folder/executed_notebook.md ]; # Only run if not already:
     then
         # install requirements
-        $( $install_requirements $folder $reqs );
+        $( bash backend/$backend/$install_requirements $folder $reqs );
         source activate $folder
         #printf "\n";
         echo Running notebook $notebook ...;
-        $( bash $backend/$execute_note $notebook $folder/$executed_file );
+        $( bash backend/$backend/$execute_note $notebook $folder/$executed_file );
         if [ "$TRAVIS_PULL_REQUEST" == "false" ]; 
         then
             echo "Adding executed notebook to github ...";
