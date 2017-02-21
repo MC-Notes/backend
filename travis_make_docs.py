@@ -76,5 +76,5 @@ if __name__ == "__main__":
         f.write(header)
         f.write('\n')
 
-    #subprocess.call(["git", "add", outpath])
+    subprocess.call(["git", "add", outpath])
     
