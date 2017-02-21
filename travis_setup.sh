@@ -58,5 +58,5 @@ if [ "$CI" == "true" ]; then
    source download_miniconda.sh;
 fi;
 
-conda env create -f conda_base.yml
+conda env create -f backend/conda_base.yml
 source activate base
