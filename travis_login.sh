@@ -7,11 +7,11 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
         COMMIT_AUTHOR_EMAIL="ibinbei@gmail.com";
         openssl aes-256-cbc -K $encrypted_a3a89bfc08a4_key -iv $encrypted_a3a89bfc08a4_iv -in backend/secrets.tar.enc -out backend/secrets.tar -d
         tar xvf backend/secrets.tar;
-        chmod 600 backend/github_deploy;
-        chmod 600 backend/zenodo_access;
+        chmod 600 github_deploy;
+        chmod 600 zenodo_access;
         eval `ssh-agent -s`;
-        ssh-add backend/github_deploy;
-        ZENODO_ACCESS_TOKEN=`cat backend/zenodo-access`;
+        ssh-add github_deploy;
+        ZENODO_ACCESS_TOKEN=`cat zenodo-access`;
         ZENODO_ACCESS=https://sandbox.zenodo.org/api/deposit/depositions;
         #git clone $REPO out
         #cd out
@@ -20,7 +20,7 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
         git config user.email "$COMMIT_AUTHOR_EMAIL";
     else
         # For local run of script:
-        ZENODO_ACCESS_TOKEN=`cat backend/zenodo-access`;
+        ZENODO_ACCESS_TOKEN=`cat zenodo-access`;
         ZENODO_ACCESS=https://sandbox.zenodo.org/api/deposit/depositions;
     fi;
 fi;

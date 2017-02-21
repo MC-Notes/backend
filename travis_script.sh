@@ -19,7 +19,7 @@ do
         continue; # files are missing, we keep running for other folders (can be fixed by seperate branches later)
     fi;
     
-    if [ ! -f $folder/$executed_file ]; # || [ ! -f $folder/executed_notebook.md ]; # Only run if not already:
+    if [ ! -f $folder$executed_file ]; # || [ ! -f $folder/executed_notebook.md ]; # Only run if not already:
     then
         # install requirements
         source backend/$backend/$install_requirements $folder $folder$reqs;
@@ -52,7 +52,7 @@ do
             printf "\n";
             echo Uploading $folder to zenodo;
             python backend/zenodo_upload_doi.py $ZENODO_ACCESS $ZENODO_ACCESS_TOKEN $folder$metadata $folder$executed_file $folder$reqs
-            git add $folder/zenodo_upload.yml;
+            git add ${folder}zenodo_upload.yml;
             git commit -m "new: $SHA Uploaded to zenodo $folder";
         fi;
     else
