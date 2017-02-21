@@ -1,5 +1,5 @@
 #!/bin/bash
-#set -e # halt on error
+set -e # halt on error
 for folder in $( ls -d */ )
 do
     printf "+++++++++++++++++++++++++++++++ \n";
