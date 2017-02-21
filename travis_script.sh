@@ -29,8 +29,9 @@ do
         if [ "$TRAVIS_PULL_REQUEST" == "false" ]; 
         then
             echo "Adding executed notebook to github ...";
-            git add $folder/$executed_file;
-            git commit -m "new: ${SHA} Executed notebook $notebook";
+            git add $folder$executed_file;
+            git add $folder$metadata;
+            git commit -m "new: Executed notebook $notebook";
         fi;
     else
         #printf "\n";
@@ -42,7 +43,7 @@ do
         then
             printf "\n";
             echo Uploading $folder to zenodo;
-            python zenodo_upload_doi.py $ZENODO_ACCESS $ZENODO_ACCESS_TOKEN $folder$metadata $folder$executed_file $folder$reqs
+            python backend/zenodo_upload_doi.py $ZENODO_ACCESS $ZENODO_ACCESS_TOKEN $folder$metadata $folder$executed_file $folder$reqs
             git add $folder/zenodo_upload.yml;
             git commit -m "new: $SHA Uploaded to zenodo $folder";
         fi;
