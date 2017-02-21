@@ -1,5 +1,5 @@
-## Backend repository.
-Tags represent a workflow version. 
+# Backend repository
+Tags represent a workflow versions. This repository holds the different version of the backend to be used by the volumes. The volumes define the backend version to use in their `mc_notes.yml` file. 
 
 ## Environment variables
 Environment variables for backends are available in every script. We source scripts from the main thread to retain environment variables. Variables are:
