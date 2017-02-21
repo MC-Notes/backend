@@ -1,4 +1,5 @@
 #!/bin/bash
-conda create --name $1 --clone base;
-source activate $folder
+env_name=${1%/}
+conda create --name $env_name --clone base;
+source activate $env_name
 pip install $2;
