@@ -8,13 +8,13 @@ do
     printf "Processing $folder...\n";
     check_files;
     file_check=$?
-    if [ file_check == 0 ];
+    if [ $file_check == 0 ];
     then
-    	continue;
+    	continue; # not running in docs or backend
     fi;
-    if [ file_check == 2 ];
+    if [ $file_check == 2 ];
 	then
-    	continue;
+    	continue; # files are missing, we keep running for other folders (can be fixed by seperate branches later)
     fi;
     
     if [ ! -f $folder/$executed_file ]; # || [ ! -f $folder/executed_notebook.md ]; # Only run if not already:
