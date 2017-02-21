@@ -7,6 +7,6 @@ executed_file: executed_notebook.ipynb
 # Extension for note publication notebook
 note_file_ext: .ipynb
 # Script to execute. This command will be run with 2 arguments: $<path/to/publication/note> $<path/to/publication/executed_file>
-execute_note: run_notebook.py
+execute_note: run_note.sh
 # command line to install requirements of publications. This command will be run with arguments: $<path/to/publication $<path/to/publication/requirements.txt>
 install_requirements: install_reqs.sh
