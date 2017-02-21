@@ -47,7 +47,7 @@ function check_files {
 eval $(parse_yaml mc_config.yml)
 echo "Running backend environment $backend with workflow version $workflow_version"
 
-eval $(parse_yaml $backend/config.yml)
+eval $(parse_yaml backend/$backend/config.yml)
 required_files=($metadata $reqs)
 echo "Required Files: ${required_files[*]}"
 
