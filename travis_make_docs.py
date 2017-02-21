@@ -68,6 +68,8 @@ if __name__ == "__main__":
             subprocess.call(["git", "rm", reviewpath])
         outfolder='_accepted' # put the new file into accepted
     outpath = 'docs/{}/{}.md'.format(outfolder, filename)
+    if not os.path.exists('docs/{}'.format(outfolder)):
+        os.makedirs('docs/{}'.format(outfolder))
     with codecs.open(outpath, 'w', 'utf-8') as f:
         # Write a header for the gh-pages website and safe it for later usage
         f.seek(0)
