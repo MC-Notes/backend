@@ -8,13 +8,18 @@ do
     printf "Processing $folder...\n";
     check_files;
     file_check=$?
-    test file_check == 0 && continue;
-    test file_check == 2 && (break; exit 2);
+    if [ file_check == 0 ];
+    then
+    	continue;
+    fi;
+    if [ file_check == 2 ]
+    	continue;
+    fi;
     
     if [ ! -f $folder/$executed_file ]; # || [ ! -f $folder/executed_notebook.md ]; # Only run if not already:
     then
         # install requirements
-        $( $install_requirements );
+        $( $install_requirements $folder $reqs );
         source activate $folder
         #printf "\n";
         echo Running notebook $notebook ...;
