@@ -62,7 +62,7 @@ if __name__ == "__main__":
     import codecs
     outfolder='_under_review'
 
-    if meta_data['accepted'] in ['true', 'yes', 'y']:
+    if str(meta_data['accepted']).lower() in ['true', 'yes', 'y']:
         reviewpath = 'docs/{}/{}.md'.format(outfolder, filename)
         if os.path.exists(reviewpath):
             subprocess.call(["git", "rm", reviewpath])
