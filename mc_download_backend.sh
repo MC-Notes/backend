@@ -20,10 +20,11 @@ parse_yaml() {
         }
     }' | sed 's/_=/+=/g'
 }
-
+rm -r backend
 eval $(parse_yaml mc_config.yml)
-wget -q -O backend.zip https://github.com/MC-Notes/backend/archive/$backend_version.zip
+wget -O backend.zip https://github.com/MC-Notes/backend/archive/$workflow_version.zip
 unzip -o backend.zip -d backend
-rm backend.zip  
-
+_zip_folder=$(ls backend/)
+mv backend/*/* backend/
+rm -r backend.zip backend/$_zip_folder
 
