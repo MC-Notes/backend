@@ -22,6 +22,8 @@ parse_yaml() {
 }
 
 eval $(parse_yaml mc_config.yml)
-wget -q -O backend.tar.gz https://github.com/MC-Notes/backend/archive/$backend_version.tar.gz -C ./
+wget -q -O backend.zip https://github.com/MC-Notes/backend/archive/$backend_version.zip
+unzip -o backend.zip -d backend
+rm backend.zip  
 
 
