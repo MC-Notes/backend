@@ -12,7 +12,8 @@ do
     then
     	continue;
     fi;
-    if [ file_check == 2 ]
+    if [ file_check == 2 ];
+	then
     	continue;
     fi;
     
