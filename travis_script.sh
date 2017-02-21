@@ -60,7 +60,7 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
         #    echo "No changes to the output on this push; exiting."
         #    exit 0
         #fi
-        git push $SSH_REPO "$TRAVIS_BRANCH";
+        git push origin $TRAVIS_BRANCH;
     else
         echo Updated tree, see git status for details.;
     fi;
