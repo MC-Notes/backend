@@ -24,9 +24,9 @@ function check_files {
    local exit_after=0
 
    # Do not run on gh-pages
-   if [ $folder == "docs/" ];
+   if [ $folder == "docs/" ] || [ $folder == "backend/"];
    then
-     printf "Not running on gh-pages\n" 1>&2; 
+     printf "Not running on gh-pages and backend\n" 1>&2; 
      return 0;
    fi;
 
