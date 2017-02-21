@@ -18,6 +18,8 @@ metadata.setdefault('upload_type', 'publication')
 metadata.setdefault('publication_type', 'other')
 metadata.setdefault('access_right', 'open')
 
+del metadata['accepted']
+
 import time
 l = time.localtime()
 metadata.setdefault('publication_date', "{tm_year}-{tm_mon:>02}-{tm_mday:>02}".format(tm_year=l.tm_year, tm_mon=l.tm_mon, tm_mday=l.tm_mday))
@@ -56,12 +58,17 @@ else:
     # deposition success:
     post_url = access(r_json['links']['files'])
     # add notebook and requirements to deposition
-    with open(os.path.join(folder, 'executed_notebook.ipynb'), 'rb') as f:
+    with open(notebook, 'rb') as f:
         data = {'filename': 'notebook.ipynb'}
         files = {'file': f}
         r = requests.post(post_url, data=data, files=files)
         
     with open(requirements, 'rb') as f:
+        data = {'filename': 'requirements.txt'}
+        files = {'file': f}
+        r = requests.post(post_url, data=data, files=files)
+
+    with open(metadata_file, 'rb') as f:
         data = {'filename': 'requirements.txt'}
         files = {'file': f}
         r = requests.post(post_url, data=data, files=files)

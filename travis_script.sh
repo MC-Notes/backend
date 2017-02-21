@@ -38,10 +38,13 @@ do
         echo $notebook already run, not rerunning.;
     fi;
 
-    echo creating docs collection;
-    python backend/travis_make_docs.py $folder;
-    git commit -m "new: Added docs files for notebook $notebook"    
-
+    if [ "$TRAVIS_PULL_REQUEST" == "false" ]; 
+        then
+        echo creating docs collection;
+        python backend/travis_make_docs.py $folder;
+        git commit -m "new: Added docs files for notebook $notebook"    
+    fi;
+    
     if [ ! -f $folder/zenodo_upload.yml ];
     then
         if [ "$TRAVIS_PULL_REQUEST" == "false" ]; 
