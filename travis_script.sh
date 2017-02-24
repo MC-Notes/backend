@@ -22,7 +22,9 @@ do
     if [ ! -f $folder$executed_file ]; # || [ ! -f $folder/executed_notebook.md ]; # Only run if not already:
     then
         # install requirements
-        source backend/$backend/$install_requirements $folder $folder$reqs;
+        if [ "$CI" == "true" ]; then
+            source backend/$backend/$install_requirements $folder $folder$reqs;
+        fi;
         #printf "\n";
         echo Running notebook $notebook ...;
         source backend/$backend/$execute_note $notebook $folder$executed_file;

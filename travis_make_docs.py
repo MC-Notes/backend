@@ -76,7 +76,8 @@ if __name__ == "__main__":
     content = ""
 
     if 1:
-        with open(outfile, 'r') as f:
+        import nbformat, nbconvert
+        with open(executed_file, 'r') as f:
             nb = nbformat.read(f, as_version=4)
         
         from nbconvert.exporters import HTMLExporter
@@ -85,7 +86,7 @@ if __name__ == "__main__":
             #output_files_dir='images/'.format(filename), 
             encoding='utf-8')
             )
-        content = htmlnb
+        content = htmlnb.replace('{{', '{ {').replace('<!--', '```').replace('-->', '```')
     
     with codecs.open(outpath, 'w', 'utf-8') as f:
         # Write a header for the gh-pages website and safe it for later usage
