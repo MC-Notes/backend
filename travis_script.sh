@@ -41,7 +41,7 @@ do
     if [ "$TRAVIS_PULL_REQUEST" == "false" ]; 
         then
         echo creating docs collection;
-        python backend/travis_make_docs.py $folder;
+        python backend/travis_make_docs.py $folder $folder$executed_file;
         git commit -m "new: Added docs files for notebook $notebook"    
     fi;
     

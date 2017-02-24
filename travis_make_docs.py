@@ -48,13 +48,15 @@ def create_docs_filename(title):
     return title
 
 if __name__ == "__main__":
-    import sys, nbformat, os, subprocess
-    from nbconvert.preprocessors import ExecutePreprocessor
-    from nbconvert.preprocessors.execute import CellExecutionError
-    from nbconvert.exporters import MarkdownExporter
+    import sys, os, subprocess
 
     argv = sys.argv[1:]
-    note_folder = argv[0]
+    try:
+        note_folder = argv[0]
+        executed_file = argv[1]
+    except:
+        print("Usage: python travis_make_docs.py <path/to/folder> <path/to/executed/file>")
+        sys.exit(2)
 
     header, filename, meta_data = create_meta_header(note_folder) # Generate metadata header
     # Make blog post with metadata header
@@ -63,18 +65,34 @@ if __name__ == "__main__":
     outfolder='_under_review'
 
     if str(meta_data['accepted']).lower() in ['true', 'yes', 'y']:
-        reviewpath = 'docs/{}/{}.md'.format(outfolder, filename)
+        reviewpath = 'docs/{}/{}.html'.format(outfolder, filename)
         if os.path.exists(reviewpath):
             subprocess.call(["git", "rm", reviewpath])
         outfolder='_accepted' # put the new file into accepted
-    outpath = 'docs/{}/{}.md'.format(outfolder, filename)
+    outpath = 'docs/{}/{}.html'.format(outfolder, filename)
     if not os.path.exists('docs/{}'.format(outfolder)):
         os.makedirs('docs/{}'.format(outfolder))
+
+    content = ""
+
+    if 1:
+        with open(outfile, 'r') as f:
+            nb = nbformat.read(f, as_version=4)
+        
+        from nbconvert.exporters import HTMLExporter
+        htmlexport = HTMLExporter()
+        htmlnb, htmlresources = htmlexport.from_notebook_node(nb, resources=dict(
+            #output_files_dir='images/'.format(filename), 
+            encoding='utf-8')
+            )
+        content = htmlnb
+    
     with codecs.open(outpath, 'w', 'utf-8') as f:
         # Write a header for the gh-pages website and safe it for later usage
         f.seek(0)
         f.write(header)
         f.write('\n')
+        f.write(content)
 
     subprocess.call(["git", "add", outpath])
     

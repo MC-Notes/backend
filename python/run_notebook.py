@@ -54,7 +54,6 @@ def main(argv=None):
     import nbformat
     from nbconvert.preprocessors import ExecutePreprocessor
     from nbconvert.preprocessors.execute import CellExecutionError
-    from nbconvert.exporters import MarkdownExporter
 
     notebook = argv[0]
     outfile = argv[1]
@@ -71,21 +70,37 @@ def main(argv=None):
             print(c)
             return 2
         with open(outfile, 'wt') as f:
-            nbformat.write(nb, f)    
-    else:
-        with open(outfile, 'r') as f:
-            nb = nbformat.read(f, as_version=4)
+            nbformat.write(nb, f)
+    #else:
+    #    with open(outfile, 'r') as f:
+    #        nb = nbformat.read(f, as_version=4)
     
-    header, filename = create_meta_header(note_folder) # Generate metadata header
-    # Make blog post with metadata header
-    import codecs
-    with codecs.open('docs/_posts/{}.md'.format(filename), 'w', 'utf-8') as f:
-        # Write a header for the gh-pages website and safe it for later usage
-        f.seek(0)
-        f.write(header)
-        f.write('\n')
-    
+    #header, filename = create_meta_header(note_folder) # Generate metadata header        
+
+    #import codecs
+    #with codecs.open('docs/_posts/{}.md'.format(filename), 'w', 'utf-8') as f:
+    #    # Write a header for the gh-pages website and safe it for later usage
+    #    f.seek(0)
+    #    f.write(header)
+    #    f.write('\n')
+
+    # from nbconvert.exporters import HTMLExporter
+    # htmlexport = HTMLExporter()
+
+    # htmlnb, htmlresources = htmlexport.from_notebook_node(nb, resources=dict(
+    #     #output_files_dir='images/'.format(filename), 
+    #     encoding='utf-8')
+    #     )
+
+    # import codecs       
+    # with codecs.open(os.path.join(note_folder,'executed_notebook.html'), 'w', 'utf-8') as f:
+    #     # Write a header for the gh-pages website and safe it for later usage
+    #     f.seek(0)
+    #     f.write(htmlnb)
+    #     #f.write('\n')
+
     if 0: # following some old code for writing markdown exports:
+        from nbconvert.exporters import MarkdownExporter
         mdexport = MarkdownExporter()
         from nbconvert.writers import FilesWriter
         mdnb, mdresources = mdexport.from_notebook_node(nb, resources=dict(output_files_dir='images/'.format(filename), encoding='utf-8'))
